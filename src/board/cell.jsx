@@ -1,41 +1,47 @@
 import { useState } from "react";
 
-function Cell({board,col,row}) {
-    const [num, setNum] = useState("[]");
-    function reveal(board,row,col) {
-        if (board[row][col].mine === true){
-            setNum("kaboom");
-            return;
-        }
-        let cnt = 0;
-        if (row > 0){
-            if (board[row-1][col].mine === true){
-                cnt += 1;
-            }
-        }
-        if (row < board.length - 1){
-            if (board[row + 1][col].mine === true){
-                cnt += 1;
-            }
-        }
-        if (col > 0){
-            if (board[row][col - 1].mine === true){
-                cnt += 1;
-            }
-        }
-        if (col < board[0].length - 1){
-            if (board[row][col + 1].mine === true){
-                cnt += 1;
-            }
-        }
-        setNum(cnt);
+function Cell({setBoard,col,row,board}) {
+    let newBoard = structuredClone(board);
+    function whenClicked(board, row, col) {
 
+        function reveal(r, c) {
 
+            if (r < 0 ||
+                r > board.length - 1 ||
+                c < 0 ||
+                c > board[0].length -1 ||
+                board[r][c].revealed === true
+            ){
+                return;
+            }
+
+            board[r][c].revealed = true;
+
+            if (board[r][c].mine === true){
+                return;
+            }
+
+            if (board[r][c].number > 0){
+                return;
+            }
+            reveal(r - 1, c);
+            reveal(r + 1, c);
+            reveal(r, c - 1);
+            reveal(r, c + 1);
+
+            reveal(r - 1, c - 1);
+            reveal(r - 1, c + 1);
+            reveal(r + 1, c - 1);
+            reveal(r + 1, c + 1);
     }
-
+    reveal(row, col);
+    setBoard(board);
+    }
     return (
-        <button onClick={() => reveal(board,row,col)}>
-            {num}
+        <button onClick={() => whenClicked(newBoard,row,col)}>
+            {board[row][col].revealed
+            ? (board[row][col].mine ? ".." : board[row][col].number)
+            : "[]"}
         </button>
     );
 }
