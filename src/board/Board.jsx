@@ -10,6 +10,7 @@ function Board({ board }) {
                             key={colIndex}
                             row={rowIndex}
                             col={colIndex}
+                            board={board}
                         />
                     ))}
                 </div>
