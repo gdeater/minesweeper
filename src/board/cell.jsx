@@ -3,7 +3,18 @@ import { useState } from "react";
 function Cell({setBoard,col,row,board}) {
     let newBoard = structuredClone(board);
     function whenClicked(board, row, col) {
-
+        if (board[row][col].mine === true){
+            let tempBoard = structuredClone(board);
+            for(let r = 0;r < board.length; r++){
+                for(let c = 0;c < board[0].length;c++){
+                    if (tempBoard[r][c].mine){
+                        tempBoard[r][c].revealed = true;
+                    }
+                }
+            }
+            setBoard(tempBoard);
+            return;
+        }
         function reveal(r, c) {
 
             if (r < 0 ||
@@ -33,7 +44,7 @@ function Cell({setBoard,col,row,board}) {
             reveal(r - 1, c + 1);
             reveal(r + 1, c - 1);
             reveal(r + 1, c + 1);
-    }
+        }
     reveal(row, col);
     setBoard(board);
     }
