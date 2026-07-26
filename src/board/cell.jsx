@@ -20,6 +20,7 @@ function Cell({setBoard,col,row,board,flag}) {
                     for(let c = 0;c < board[0].length;c++){
                         if (tempBoard[r][c].mine){
                             tempBoard[r][c].revealed = true;
+                            tempBoard[r][c].flagged = false;
                         }
                     }
                 }
@@ -62,7 +63,7 @@ function Cell({setBoard,col,row,board,flag}) {
     }
     return (
         <button onClick={() => whenClicked(newBoard,row,col)}>
-            {board[row][col].flagged ? "f" : (board[row][col].revealed
+            {board[row][col].flagged ? "f." : (board[row][col].revealed
             ? (board[row][col].mine ? ".." : board[row][col].number)
             : "[]")}
         </button>

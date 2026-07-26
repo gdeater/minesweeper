@@ -90,6 +90,7 @@ function App(){
     });
     return(
       <div>
+          <h1>minesweeper</h1>
           <Board board={board} setBoard={setBoard} flag={flag}/>
           <FlagButton setFlag={setFlag}/>
           <h1>mode : {flag}</h1>
