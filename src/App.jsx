@@ -1,9 +1,13 @@
 import Board from "./board/Board";
+import FlagButton from "./flagButton";
 import { useState } from "react";
 function App(){
     const [rowLength,setRowLength] = useState(7);
     const [colLength,setColLength] = useState(7);
     const [mines,setMines] = useState(7);
+    const [flag,setFlag] = useState(0);
+    const [countFlag,setCountFlag] = useState(mines);
+
     function preCompute(board,row,col){
         let cnt = 0;
         if (row > 0){
@@ -57,7 +61,8 @@ function App(){
                 {
                     "revealed": false,
                     "mine":false,
-                    "number": 0
+                    "number": 0,
+                    "flagged":false
                 }
               );
             }
@@ -83,10 +88,11 @@ function App(){
         }
         return temp;
     });
-    console.log(board);
     return(
       <div>
-          <Board board={board} setBoard={setBoard}/>
+          <Board board={board} setBoard={setBoard} flag={flag}/>
+          <FlagButton setFlag={setFlag}/>
+          <h1>mode : {flag}</h1>
       </div>
     )
 }
