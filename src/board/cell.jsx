@@ -1,16 +1,20 @@
 import { useState } from "react";
 
-function Cell({setBoard,col,row,board,flag}) {
+function Cell({setBoard,col,row,board,flag,setCountFlag,countFlag}) {
     let newBoard = structuredClone(board);
     function whenClicked(board, row, col) {
         if (flag === 1){
-            newBoard[row][col].flagged = true;
-            setBoard(newBoard);
-            return;
+            if (board[row][col].flagged === false){
+                setCountFlag(countFlag + 1);
+                newBoard[row][col].flagged = true;
+                setBoard(newBoard);
+                return;
+            }
         }
         else{
             if (board[row][col].flagged === true){
                 newBoard[row][col].flagged = false;
+                setCountFlag(countFlag - 1);
                 setBoard(newBoard);
                 return;
             }

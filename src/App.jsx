@@ -6,7 +6,7 @@ function App(){
     const [colLength,setColLength] = useState(7);
     const [mines,setMines] = useState(7);
     const [flag,setFlag] = useState(0);
-    const [countFlag,setCountFlag] = useState(mines);
+    const [countFlag,setCountFlag] = useState(0);
 
     function preCompute(board,row,col){
         let cnt = 0;
@@ -91,9 +91,10 @@ function App(){
     return(
       <div>
           <h1>minesweeper</h1>
-          <Board board={board} setBoard={setBoard} flag={flag}/>
+          <Board board={board} setBoard={setBoard} flag={flag} setCountFlag={setCountFlag} countFlag={countFlag}/>
           <FlagButton setFlag={setFlag}/>
           <h1>mode : {flag}</h1>
+          <h1>flags : {countFlag}</h1>
       </div>
     )
 }

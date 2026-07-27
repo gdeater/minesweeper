@@ -1,6 +1,6 @@
 import Cell from "./Cell";
 
-function Board({ board,setBoard,flag }) {
+function Board({ board,setBoard,flag,setCountFlag,countFlag }) {
     return (
         <div>
             {board.map((row, rowIndex) => (
@@ -13,6 +13,9 @@ function Board({ board,setBoard,flag }) {
                             col={colIndex}
                             board={board}
                             flag={flag}
+                            setCountFlag={setCountFlag}
+                            countFlag={countFlag}
+
                         />
                     ))}
                 </div>
