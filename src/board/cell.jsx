@@ -1,11 +1,21 @@
 import { useState } from "react";
 
-function Cell({setBoard,col,row,board,flag,setCountFlag,countFlag}) {
+function Cell({setBoard,col,row,board,flag,setCountFlag,countFlag,setAnnouncement}) {
     let newBoard = structuredClone(board);
     function whenClicked(board, row, col) {
+        if (countFlag === 0){
+            for (let r = 0; r < board.length; r++){
+                for(let c = 0; c < board[0].length;c++){
+                    if (!board[r][c].mine && board[r][c].flagged){
+                        return;
+                    }
+                }
+            }
+            setAnnouncement("you win");
+        }
         if (flag === 1){
             if (board[row][col].flagged === false){
-                setCountFlag(countFlag + 1);
+                setCountFlag(countFlag - 1);
                 newBoard[row][col].flagged = true;
                 setBoard(newBoard);
                 return;
@@ -14,7 +24,7 @@ function Cell({setBoard,col,row,board,flag,setCountFlag,countFlag}) {
         else{
             if (board[row][col].flagged === true){
                 newBoard[row][col].flagged = false;
-                setCountFlag(countFlag - 1);
+                setCountFlag(countFlag + 1);
                 setBoard(newBoard);
                 return;
             }
@@ -29,6 +39,7 @@ function Cell({setBoard,col,row,board,flag,setCountFlag,countFlag}) {
                     }
                 }
                 setBoard(tempBoard);
+                setAnnouncement("you lose");
                 return;
             }
             function reveal(r, c) {
