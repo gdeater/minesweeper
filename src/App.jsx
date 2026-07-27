@@ -1,5 +1,6 @@
 import Board from "./board/Board";
 import FlagButton from "./flagButton";
+import ResetButton from "./resetButton";
 import { useState } from "react";
 function App(){
     const [rowLength,setRowLength] = useState(7);
@@ -93,6 +94,11 @@ function App(){
       <div>
           <h1>minesweeper</h1>
           <h1>{announcement}</h1>
+          <ResetButton rowLength={rowLength}
+                       colLength={colLength}
+                       setBoard={setBoard}
+                       setAnnouncement={setAnnoucement}
+                       mines={mines}></ResetButton>
           <Board board={board}
                  setBoard={setBoard}
                  flag={flag} 
