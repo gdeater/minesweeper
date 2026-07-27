@@ -93,7 +93,15 @@ function App(){
       <div>
           <h1>minesweeper</h1>
           <h1>{announcement}</h1>
-          <Board board={board} setBoard={setBoard} flag={flag} setCountFlag={setCountFlag} countFlag={countFlag} setAnnouncement={setAnnoucement}/>
+          <Board board={board}
+                 setBoard={setBoard}
+                 flag={flag} 
+                 setCountFlag={setCountFlag} 
+                 countFlag={countFlag} 
+                 setAnnouncement={setAnnoucement}
+                 rowLength={rowLength}
+                 colLength={colLength}
+                 mines={mines}/>
           <FlagButton setFlag={setFlag}/>
           <h1>mode : {flag}</h1>
           <h1>flags : {countFlag}</h1>
