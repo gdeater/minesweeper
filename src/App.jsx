@@ -2,6 +2,7 @@ import Board from "./board/Board";
 import FlagButton from "./flagButton";
 import ResetButton from "./resetButton";
 import DifficultyUI from "./DifficultyUI";
+import InputName from "./InputName";
 import { useState } from "react";
 function App(){
     const [rowLength,setRowLength] = useState(10);
@@ -10,6 +11,8 @@ function App(){
     const [flag,setFlag] = useState(0);
     const [countFlag,setCountFlag] = useState(15);
     const [announcement, setAnnoucement] = useState("");
+    const [displayName,setDisplayName] = useState("");
+    const [difficultyPlayed, setDifficultyPlayed] = useState("");
 
     function preCompute(board,row,col){
         let cnt = 0;
@@ -94,6 +97,8 @@ function App(){
     return(
       <div>
           <h1>minesweeper</h1>
+          <h1>hello: {displayName}</h1>
+          <InputName setDisplayName={setDisplayName}></InputName>
           <h1>{announcement}</h1>
           <ResetButton rowLength={rowLength}
                        colLength={colLength}
@@ -102,7 +107,8 @@ function App(){
                        mines={mines}></ResetButton>
           <DifficultyUI setAnnouncement={setAnnoucement}
                         setBoard={setBoard}
-                        setCountFlag={setCountFlag}></DifficultyUI>
+                        setCountFlag={setCountFlag}
+                        setDifficultyPlayed={setDifficultyPlayed}></DifficultyUI>
           <Board board={board}
                  setBoard={setBoard}
                  flag={flag} 
@@ -111,7 +117,9 @@ function App(){
                  setAnnouncement={setAnnoucement}
                  rowLength={rowLength}
                  colLength={colLength}
-                 mines={mines}/>
+                 mines={mines}
+                 name={displayName}
+                 difficultyPlayed={difficultyPlayed}/>
           <FlagButton setFlag={setFlag}/>
           <h1>mode : {flag}</h1>
           <h1>flags : {countFlag}</h1>

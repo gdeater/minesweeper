@@ -1,6 +1,20 @@
 import { useState } from "react";
 
-function Cell({setBoard,col,row,board,flag,setCountFlag,countFlag,setAnnouncement,rowLength,colLength,mines}) {
+function Cell({setBoard,col,row,board,flag,setCountFlag,countFlag,setAnnouncement,rowLength,colLength,mines,name,difficultyPlayed}) {
+    function sendScores(){
+        fetch("http://localhost:3001/scores",{
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify(
+                {
+                    "name": name,
+                    "difficulty": difficultyPlayed
+                }
+            )
+        });
+    }
     function preCompute(board,row,col){
         let cnt = 0;
         if (row > 0){
@@ -92,7 +106,10 @@ function Cell({setBoard,col,row,board,flag,setCountFlag,countFlag,setAnnouncemen
                     }
                 }
             }
+
             setAnnouncement("you win");
+            sendScores();
+            return;
         }
         if (flag === 1){
             if (board[row][col].flagged === false){
@@ -168,5 +185,4 @@ function Cell({setBoard,col,row,board,flag,setCountFlag,countFlag,setAnnouncemen
         </button>
     );
 }
-
 export default Cell;

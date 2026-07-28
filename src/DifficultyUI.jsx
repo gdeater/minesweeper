@@ -1,4 +1,4 @@
-function DifficultyUI({setAnnouncement,setBoard,setCountFlag}){
+function DifficultyUI({setAnnouncement,setBoard,setCountFlag,setDifficultyPlayed}){
     function preCompute(board,row,col){
         let cnt = 0;
         if (row > 0){
@@ -43,7 +43,7 @@ function DifficultyUI({setAnnouncement,setBoard,setCountFlag}){
         }
       return cnt;
     }
-    function reset(rowLength,colLength,mines){
+    function reset(rowLength,colLength,mines,diff){
         const board = [];
         setAnnouncement("");
 
@@ -80,12 +80,14 @@ function DifficultyUI({setAnnouncement,setBoard,setCountFlag}){
         }
         setBoard(board);
         setCountFlag(mines);
+        setDifficultyPlayed(diff);
+        console.log(diff);
     }
     return(
         <div>
-            <button onClick={() => reset(6,7,7)}>easy</button>
-            <button onClick={() => reset(10,10,15)}>medium</button>
-            <button onClick={() => reset(15,15,30)}>hard</button>
+            <button onClick={() => reset(6,7,3,"easy")}>easy</button>
+            <button onClick={() => reset(10,10,15,"medium")}>medium</button>
+            <button onClick={() => reset(15,15,30,"hard")}>hard</button>
         </div>
     );
 }
