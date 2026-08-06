@@ -118,6 +118,12 @@ function Cell({setBoard,col,row,board,flag,setCountFlag,countFlag,setAnnouncemen
                 setBoard(newBoard);
                 return;
             }
+            else {
+                setCountFlag(countFlag + 1);
+                newBoard[row][col].flagged = false;
+                setBoard(newBoard);
+                return;
+            }
         }
         else{
             if (board[row][col].flagged === true){
